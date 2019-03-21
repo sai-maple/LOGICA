@@ -6,8 +6,8 @@ https://unityroom.com/games/libertywall_logica
 
 
 ## Requirement
-・TextMeshPro
-・PostProcessing
-・UniRx
-・Zenject
-・DoTween
+・TextMeshPro  
+・PostProcessing  
+・UniRx  
+・Zenject  
+・DoTween  
