@@ -2,6 +2,7 @@ using DG.Tweening;
 using LOGICA.Common;
 using LOGICA.Model;
 using UniRx;
+using UniRx.Async;
 using UnityEngine;
 using Zenject;
 
@@ -32,7 +33,7 @@ namespace LOGICA.Stage
                 
         }
 
-        private void CreateStage(int index)
+        private async void CreateStage(int index)
         {
             if (_currentStage != null)
             {
@@ -42,6 +43,9 @@ namespace LOGICA.Stage
 
             if(index >= _stageObjects.Length) return;
             _gameStateModel.ResetClickCount();
+
+            await UniTask.Delay(3000);
+            
             _audioManager.Play(Clip.StageSelect);
             var stage = _container.InstantiatePrefab(_stageObjects[index]).GetComponent<StageObject>();
             stage.transform.localPosition = new Vector3(20,0,0);

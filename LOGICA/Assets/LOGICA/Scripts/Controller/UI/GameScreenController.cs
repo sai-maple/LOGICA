@@ -1,3 +1,4 @@
+using DG.Tweening;
 using LOGICA.Common;
 using LOGICA.Model;
 using TMPro;
@@ -34,13 +35,41 @@ namespace LOGICA.Controller
                     _stateModel.SetGameState(GameState.Non);
                     _windowController.OnStateChanged((int) ScreenState.Back);
                 });
+
+            var stream = _stateModel.OnGameStateChanged
+                .TakeUntilDestroy(this)
+                .Publish()
+                .RefCount();
+
+            stream.Where(_ => _ == GameState.OnClear)
+                .Subscribe(_ =>
+                {
+                    MoveOut();
+                    Invoke(nameof(NextStage), 2f);
+                });
+            stream.Where(_ => _ == GameState.OnPlay)
+                .Subscribe(_ =>
+                {
+                    BackIn();
+                    var sequence = DOTween.Sequence();
+                    sequence.AppendInterval(1f);
+                    sequence.Append(_stageLabel.DOFade(1.0f, 1f));
+                    sequence.Append(_stageLabel.DOFade(0.0f, 1f));
+                    sequence.Play();
+                });
+        }
+
+        private async void NextStage()
+        {
+            _stateModel.SetStage(_stateModel.GetStage() + 1);
+            _stateModel.SetGameState(GameState.OnPlay);
         }
 
         private void SetEvents()
         {            
             _stateModel.OnSelectStageChanged
                 .TakeUntilDestroy(this)
-                .Subscribe(_ => _stageLabel.text = $"Stage {_ + 1}");
+                .Subscribe(_ => _stageLabel.text = $"{_ + 1}");
         }
         
         public override void Open()

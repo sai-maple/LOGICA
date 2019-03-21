@@ -1,5 +1,6 @@
 ﻿using System.Linq;
-using LOGICA.Controller;
+using JetBrains.Annotations;
+using LOGICA.Common;
 using LOGICA.Light;
 using LOGICA.Model;
 using UniRx;
@@ -11,7 +12,8 @@ namespace LOGICA.Stage
     public class StageObject : MonoBehaviour
     {
         [Inject] private readonly GameStateModel _gameStateModel = default;
-        [Inject] private readonly WindowController _windowController = default;
+        [Inject] private readonly AudioManager _audioManager = default;
+//        [Inject] private readonly WindowController _windowController = default;
         [SerializeField] private LightObject[] _lightObjects = default;
 
         public void OnStart()
@@ -32,7 +34,8 @@ namespace LOGICA.Stage
                 return;
             }
 
-            _windowController.OnStateChanged((int) ScreenState.Clear);
+//            _windowController.OnStateChanged((int) ScreenState.Clear);
+            _audioManager.Play(Clip.Clear);
             _gameStateModel.SetGameState(GameState.OnClear);
         }
     }

@@ -4,7 +4,7 @@ namespace LOGICA.Common
 {
     public interface IConductor
     {
-//        IObservable<bool> OnConnect();
+        IObservable<bool> OnConnect();
 
         bool IsConnect();
     }

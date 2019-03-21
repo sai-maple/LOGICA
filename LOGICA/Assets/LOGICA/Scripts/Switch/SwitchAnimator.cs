@@ -38,9 +38,11 @@ namespace LOGICA.Switch
                 .Subscribe(_ => ClickAnimationOnPlay());
             stream
                 .Where(s => s == InputState.Enter)
+                .Where(_ => !_stateModel.IsAnimated)
                 .Subscribe(s => PointerEnterAnimationOnPlay());
             stream
                 .Where(s => s == InputState.Exit)
+                .Where(_ => !_stateModel.IsAnimated)
                 .Subscribe(s => PointerExitAnimationOnPlay());
             
             _switchObject.OnLineCollided()
