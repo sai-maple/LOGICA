@@ -521,6 +521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stageObjects:
   - {fileID: 7671127817201991138, guid: 1df3599e63a60544095807bdb4b7b1e3, type: 3}
+  - {fileID: 7671127817201991138, guid: 5e360576ee00b354cac4ad6cc87d1db0, type: 3}
   - {fileID: 1809991266, guid: 112e7227da2c7b04ab26f268a3520b9e, type: 3}
   - {fileID: 1809991266, guid: 40ab347720a0a6c4e8c5b94d47607d25, type: 3}
   - {fileID: 7671127817201991138, guid: dd319a5195797394eb2568828a808f69, type: 3}
