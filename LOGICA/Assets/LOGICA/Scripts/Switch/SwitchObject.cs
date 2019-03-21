@@ -11,7 +11,7 @@ namespace LOGICA.Switch
         [CanBeNull] [SerializeField] private LogicBase _verticalConductor = default;
         [CanBeNull] [SerializeField] private LogicBase _horizontalConductor = default;
         [SerializeField] private Direction _direction = default;
-        private readonly ReactiveProperty<InputState> _inputState = new ReactiveProperty<InputState>();
+        private readonly Subject<InputState> _inputState = new Subject<InputState>();
         private readonly Subject<Unit> _onCollide = new Subject<Unit>();
         private readonly Subject<SwitchConnection> _isConnecting = new Subject<SwitchConnection>();
 
@@ -59,7 +59,7 @@ namespace LOGICA.Switch
 
         public void SetClick(InputState state)
         {
-            _inputState.Value = state;
+            _inputState.OnNext(state);
         }
 
         public IObservable<InputState> OnInputStateChanged()
