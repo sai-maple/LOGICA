@@ -15,11 +15,11 @@ namespace LOGICA.Model
 
         public bool IsAnimated { get; private set; } = false;
 
-        public int ClickCount { get; private set; } = 0;
-        public readonly int[] BestClickCount =
-        {
-            1,1,1,1,1,1
-        };
+//        public int ClickCount { get; private set; } = 0;
+//        public readonly int[] BestClickCount =
+//        {
+//            1,1,1,1,1,1
+//        };
 
         public void SetStageNum(int num)
         {
@@ -47,15 +47,15 @@ namespace LOGICA.Model
             return _gameState.Value;
         }
         
-        public void OnClick()
-        {
-            ClickCount++;
-        }
-
-        public void ResetClickCount()
-        {
-            ClickCount = 0;
-        }
+//        public void OnClick()
+//        {
+//            ClickCount++;
+//        }
+//
+//        public void ResetClickCount()
+//        {
+//            ClickCount = 0;
+//        }
 
         public void SetAnimated(bool isAnimated)
         {

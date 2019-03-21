@@ -42,7 +42,7 @@ namespace LOGICA.Stage
             }
 
             if(index >= _stageObjects.Length) return;
-            _gameStateModel.ResetClickCount();
+//            _gameStateModel.ResetClickCount();
 
             await UniTask.Delay(3000);
             

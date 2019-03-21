@@ -10,6 +10,7 @@ using Zenject;
 
 namespace LOGICA.Controller
 {
+    // クリア画面廃止
     public class ClearScreenController : ScreenControllerBase
     {
         [Inject] private readonly AudioManager _audioManager = default;
@@ -55,7 +56,7 @@ namespace LOGICA.Controller
                 .Subscribe(_ =>
                 {
                     _audioManager.Play(Clip.Apply);
-                    UnityRoomTweet.Tweet ("libertywall_logica", $"ステージ{_stateModel.GetStage() + 1}を{_stateModel.ClickCount}手でクリア。", "unityroom", "unity1week");
+//                    UnityRoomTweet.Tweet ("libertywall_logica", $"ステージ{_stateModel.GetStage() + 1}を{_stateModel.ClickCount}手でクリア。", "unityroom", "unity1week");
                 });
         }
 

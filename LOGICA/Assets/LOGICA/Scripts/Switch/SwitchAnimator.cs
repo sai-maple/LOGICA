@@ -38,11 +38,9 @@ namespace LOGICA.Switch
                 .Subscribe(_ => ClickAnimationOnPlay());
             stream
                 .Where(s => s == InputState.Enter)
-                .Where(_ => !_stateModel.IsAnimated)
                 .Subscribe(s => PointerEnterAnimationOnPlay());
             stream
                 .Where(s => s == InputState.Exit)
-                .Where(_ => !_stateModel.IsAnimated)
                 .Subscribe(s => PointerExitAnimationOnPlay());
             
             _switchObject.OnLineCollided()
@@ -65,7 +63,7 @@ namespace LOGICA.Switch
         {
             _stateModel.SetAnimated(true);
             _audioManager.Play(Clip.Swich);
-            _stateModel.OnClick();
+//            _stateModel.OnClick();
             _sequence = DOTween.Sequence();
 
             _sequence.Append(_line.DOScale(_animatedScale, 0.3f)).SetEase(Ease.InOutCubic);

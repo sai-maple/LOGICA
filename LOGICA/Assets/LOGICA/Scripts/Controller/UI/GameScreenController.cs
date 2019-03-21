@@ -50,7 +50,7 @@ namespace LOGICA.Controller
             stream.Where(_ => _ == GameState.OnPlay)
                 .Subscribe(_ =>
                 {
-                    BackIn();
+                    base.Open();
                     var sequence = DOTween.Sequence();
                     sequence.AppendInterval(1f);
                     sequence.Append(_stageLabel.DOFade(1.0f, 1f));
