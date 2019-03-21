@@ -1,7 +1,7 @@
 ﻿using System;
 using LOGICA.Common;
 using LOGICA.Model;
-using naichilab;
+//using naichilab;
 using TMPro;
 using UniRx;
 using UnityEngine;

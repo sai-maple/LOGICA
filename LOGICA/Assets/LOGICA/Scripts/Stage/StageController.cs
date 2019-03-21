@@ -43,16 +43,17 @@ namespace LOGICA.Stage
 
             if(index >= _stageObjects.Length) return;
 //            _gameStateModel.ResetClickCount();
-
-            await UniTask.Delay(3000);
-            
-            _audioManager.Play(Clip.StageSelect);
             var stage = _container.InstantiatePrefab(_stageObjects[index]).GetComponent<StageObject>();
             stage.transform.localPosition = new Vector3(20,0,0);
             stage.transform.SetParent(transform, false);
+            _currentStage = stage;
+
+            await UniTask.Delay(3000);
+            
+            if (stage == null) return;
+            _audioManager.Play(Clip.StageSelect);
             stage.transform.DOMove(Vector3.zero, 1f).SetEase(Ease.OutQuint);
             stage.OnStart();
-            _currentStage = stage;
         }
 
         private void ReturnTitle()
