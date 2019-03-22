@@ -1,20 +1,20 @@
 ﻿using System;
 using LOGICA.Common;
 using LOGICA.Model;
-//using naichilab;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+//using naichilab;
 
-namespace LOGICA.Controller
+namespace LOGICA.Presenter
 {
     // クリア画面廃止
-    public class ClearScreenController : ScreenControllerBase
+    public class ClearScreenPresenter : ScreenPresenterBase
     {
         [Inject] private readonly AudioManager _audioManager = default;
-        [Inject] private readonly WindowController _windowController = default;
+        [Inject] private readonly WindowPresenter _windowPresenter = default;
         [Inject] private readonly GameStateModel _stateModel = default;
 
         [SerializeField] private Button _nextStageButton = default;
@@ -39,7 +39,7 @@ namespace LOGICA.Controller
                     _audioManager.Play(Clip.Apply);
                     _stateModel.SetStage(_stateModel.GetStage() + 1);
                     _stateModel.SetGameState(GameState.OnPlay);
-                    _windowController.OnStateChanged((int) ScreenState.Back);
+                    _windowPresenter.OnStateChanged((int) ScreenState.Back);
                 });
             _titleButton.OnClickAsObservable()
                 .TakeUntilDestroy(this)
@@ -48,7 +48,7 @@ namespace LOGICA.Controller
                 {
                     _audioManager.Play(Clip.Cancel);
                     _stateModel.SetGameState(GameState.Non);
-                    _windowController.OnStateChanged((int) ScreenState.Reset);
+                    _windowPresenter.OnStateChanged((int) ScreenState.Reset);
                 });
             _tweetButton.OnClickAsObservable()
                 .TakeUntilDestroy(this)

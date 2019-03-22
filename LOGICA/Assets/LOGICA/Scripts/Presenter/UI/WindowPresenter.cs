@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using LOGICA.Common;
-using LOGICA.Stage;
 using UnityEngine;
 using Zenject;
 
-namespace LOGICA.Controller
+namespace LOGICA.Presenter
 {
-    public class WindowController : WindowControllerBase
+    public class WindowPresenter : WindowPresenterBase
     {        
         [Inject] private readonly DiContainer _container = default;
-        [SerializeField] private ScreenControllerBase[] _screenPrefabs = default;
-        private readonly Stack<ScreenControllerBase> _screenStack = new Stack<ScreenControllerBase>();
+        [SerializeField] private ScreenPresenterBase[] _screenPrefabs = default;
+        private readonly Stack<ScreenPresenterBase> _screenStack = new Stack<ScreenPresenterBase>();
 
         private void Start()
         {
@@ -20,7 +19,7 @@ namespace LOGICA.Controller
 
         public override void OnStateChanged(int screenState)
         {
-            OnStateChanged<WindowController>(screenState);
+            OnStateChanged<WindowPresenter>(screenState);
         }
 
         public override void OnStateChanged<T>(int screenState, Action<T> beforeOpenAction = null)
@@ -48,7 +47,7 @@ namespace LOGICA.Controller
                 screen.MoveOut();
             }
 
-            var nextScreen = _container.InstantiatePrefab(_screenPrefabs[(int) screenState]).GetComponent<ScreenControllerBase>();
+            var nextScreen = _container.InstantiatePrefab(_screenPrefabs[(int) screenState]).GetComponent<ScreenPresenterBase>();
             nextScreen.transform.SetParent(transform, false);
             _screenStack.Push(nextScreen);
             beforeOpenAction?.Invoke(nextScreen.GetComponent<T>());

@@ -2,7 +2,7 @@
 
 namespace LOGICA.Common
 {
-    public abstract class ScreenControllerBase : MonoBehaviour
+    public abstract class ScreenPresenterBase : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _canvas = default;
         [SerializeField] private Animator _animator = default;

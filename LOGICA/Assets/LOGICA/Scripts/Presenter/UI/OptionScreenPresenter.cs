@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace LOGICA.Controller
+namespace LOGICA.Presenter
 {
-    public class OptionScreenController : ScreenControllerBase
+    public class OptionScreenPresenter : ScreenPresenterBase
     {
         
-        [Inject] private readonly WindowController _windowController = default;
+        [Inject] private readonly WindowPresenter _windowPresenter = default;
         [Inject] private readonly AudioManager _audioManager = default;
         [SerializeField] private Slider _seSlider = default;
         [SerializeField] private Button _backButton = default;
@@ -29,7 +29,7 @@ namespace LOGICA.Controller
                 .Subscribe(_ =>
                 {
                     _audioManager.Play(Clip.Cancel);
-                    _windowController.OnStateChanged((int) ScreenState.Back);
+                    _windowPresenter.OnStateChanged((int) ScreenState.Back);
                 });
         }
         

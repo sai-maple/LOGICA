@@ -7,12 +7,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace LOGICA.Controller
+namespace LOGICA.Presenter
 {
-    public class GameScreenController : ScreenControllerBase
+    public class GameScreenPresenter : ScreenPresenterBase
     {
         [Inject] private readonly AudioManager _audioManager = default;
-        [Inject] private readonly WindowController _windowController = default;
+        [Inject] private readonly WindowPresenter _windowPresenter = default;
         [Inject] private readonly GameStateModel _stateModel = default;
         [SerializeField] private Button _optionButton = default;
         [SerializeField] private Button _returnTitle = default;
@@ -25,7 +25,7 @@ namespace LOGICA.Controller
                 .Subscribe(_ =>
                 {
                     _audioManager.Play(Clip.Apply);
-                    _windowController.OnStateChanged((int) ScreenState.Option);
+                    _windowPresenter.OnStateChanged((int) ScreenState.Option);
                 });
             _returnTitle.OnClickAsObservable()
                 .TakeUntilDestroy(this)
@@ -33,7 +33,7 @@ namespace LOGICA.Controller
                 {
                     _audioManager.Play(Clip.Cancel);
                     _stateModel.SetGameState(GameState.Non);
-                    _windowController.OnStateChanged((int) ScreenState.Back);
+                    _windowPresenter.OnStateChanged((int) ScreenState.Back);
                 });
 
             var stream = _stateModel.OnGameStateChanged

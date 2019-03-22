@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace LOGICA.Common
 {
-    public class WindowControllerBase : MonoBehaviour
+    public class WindowPresenterBase : MonoBehaviour
     {
         [SerializeField] private Canvas _canvas = default;
 
